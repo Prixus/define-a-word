@@ -1,26 +1,26 @@
 version: '3'
 
 networks:
-  laravel:
+  define-a-word:
 
 services:
-  nginx:
+  define-a-word-web-server:
     image: nginx:stable-alpine
-    container_name: nginx
+    container_name: define-a-word-web-server
     ports:
     - "8088:80"
     volumes:
     - ./src:/var/www/html
     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - php
-      - mysql
+      - define-a-word-app
+      - define-a-word-database
     networks:
-      - laravel
+      - define-a-word
 
-  mysql:
+  define-a-word-database:
     image: mysql:5.7.22
-    container_name: mysql
+    container_name: define-a-word-database
     restart: unless-stopped
     tty: true
     ports:
@@ -35,16 +35,16 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
-      - laravel
+      - define-a-word
 
-  php:
+  define-a-word-app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: php
+    container_name: define-a-word-app
     volumes:
       - ./src:/var/www/html
     ports:
       - "9000:9000"
     networks:
-      - laravel
+      - define-a-word
