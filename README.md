@@ -19,7 +19,7 @@ This app uses docker for easier setup of dependencies ([Don't have docker yet? C
 ```
 4. After the building the docker images, run this command to update the app dependencies.
 ```
-λ docker-compose exec --user root php composer install
+λ docker-compose exec --user root define-a-word-app composer install
 ```
 5. Setup the app configurations by following this command. This copy the sample ENV file into our current ENV file.
 ```
