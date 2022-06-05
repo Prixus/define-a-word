@@ -4,8 +4,10 @@
 namespace App\Services;
 
 use App\Constants\DefinitionConstants;
+use App\Constants\WordSearchConstants;
 use App\Exceptions\ApiRequestException;
-use App\Repositories\Api\WordDefinitionRepository;
+use App\Repositories\Api\WordDefinitionApiRepository;
+use App\Repositories\Database\WordDefinitionDatabaseRepository;
 
 /**
  * Class WordDefinitionService
@@ -18,17 +20,27 @@ class WordDefinitionService
 {
     /**
      * Api repository that will be used for fetching word definition
-     * @var WordDefinitionRepository
+     * @var WordDefinitionApiRepository
      */
-    private $oWordDefinitionRepository;
+    private $oWordApiDefinitionRepository;
+
+    /**
+     * Database Repository that for the word definition records
+     * @var WordDefinitionDatabaseRepository
+     */
+    private $oWordDefinitionDatabaseRepository;
 
     /**
      * WordDefinitionService constructor.
-     * @param WordDefinitionRepository $oWordDefinitionRepository
+     * @param WordDefinitionApiRepository $oWordDefinitionRepository
+     * @param WordDefinitionDatabaseRepository $oWordDefinitionDatabaseRepository
      */
-    public function __construct(WordDefinitionRepository $oWordDefinitionRepository)
-    {
-        $this->oWordDefinitionRepository = $oWordDefinitionRepository;
+    public function __construct(
+        WordDefinitionApiRepository $oWordDefinitionRepository,
+        WordDefinitionDatabaseRepository $oWordDefinitionDatabaseRepository
+    ) {
+        $this->oWordApiDefinitionRepository = $oWordDefinitionRepository;
+        $this->oWordDefinitionDatabaseRepository = $oWordDefinitionDatabaseRepository;
     }
 
     /**
@@ -39,8 +51,19 @@ class WordDefinitionService
      */
     public function fetchWordDefinition(string $sWordDefinition)
     {
-        return $this->oWordDefinitionRepository
+        $oDatabaseDefinition = $this->oWordDefinitionDatabaseRepository->findWordDefinitionBySearchWord($sWordDefinition);
+        if ($oDatabaseDefinition !== null) {
+            return $oDatabaseDefinition;
+        }
+
+        $aWordDefinitions = $this->oWordApiDefinitionRepository
             ->setApiEndpoint(DefinitionConstants::WORDS_API_DEFINITION_ENDPOINT)
             ->getDataByIdRequest($sWordDefinition);
+        $aWordDefinitions[WordSearchConstants::SEARCH_WORD] = $sWordDefinition;
+        if (count($aWordDefinitions[DefinitionConstants::DEFINITIONS]) === 0) {
+            return $aWordDefinitions;
+        }
+
+        return $this->oWordDefinitionDatabaseRepository->createNewSearchRecord($aWordDefinitions);
     }
 }

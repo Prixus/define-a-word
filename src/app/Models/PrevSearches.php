@@ -22,6 +22,12 @@ class PrevSearches extends Model
     protected $table = WordSearchConstants::TABLE_NAME;
 
     /**
+     * Sets the Primary Key
+     * @var string
+     */
+    protected $primaryKey = WordSearchConstants::PRIMARY_KEY;
+
+    /**
      * The attributes that aren't mass assignable.
      * @var array
      */

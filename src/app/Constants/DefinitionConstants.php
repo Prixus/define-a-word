@@ -32,5 +32,5 @@ class DefinitionConstants extends BaseConstants
      * API Keys
      */
     public const WORD = 'word';
-    public const DEFINITIONS = 'definitions';
+    public const PART_OF_SPEECH_KEY = 'partOfSpeech';
 }

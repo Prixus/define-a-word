@@ -22,6 +22,12 @@ class Definitions extends Model
     protected $table = DefinitionConstants::TABLE_NAME;
 
     /**
+     * Sets the Primary Key
+     * @var string
+     */
+    protected $primaryKey = DefinitionConstants::PRIMARY_KEY;
+
+    /**
      * The attributes that aren't mass assignable.
      * @var array
      */

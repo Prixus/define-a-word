@@ -8,16 +8,16 @@ use App\Exceptions\ApiRequestException;
 use Illuminate\Support\Arr;
 
 /**
- * Class WordDefinitionRepository
+ * Class WordDefinitionApiRepository
  *
  * @package App\Repositories\Api
  * @author Simon Peter Calamno
  * @since 2022.04.06
  */
-class WordDefinitionRepository extends ApiBaseRepository
+class WordDefinitionApiRepository extends ApiBaseRepository
 {
     /**
-     * WordDefinitionRepository constructor.
+     * WordDefinitionApiRepository constructor.
      */
     public function __construct()
     {
@@ -40,6 +40,8 @@ class WordDefinitionRepository extends ApiBaseRepository
         array $aRequestParameters = []
     ) {
       $aWordsDefinition = parent::getDataByIdRequest($sId, $sIdentifier, $aRequestParameters);
-      return Arr::get($aWordsDefinition, DefinitionConstants::DEFINITIONS, []);
+      return [
+          DefinitionConstants::DEFINITIONS => Arr::get($aWordsDefinition, DefinitionConstants::DEFINITIONS, [])
+      ];
     }
 }

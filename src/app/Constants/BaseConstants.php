@@ -47,4 +47,9 @@ abstract class BaseConstants
      */
     public const DEFINITION_NO = 'definition_no';
     public const PREV_SEARCH_NO = 'prev_search_no';
+
+    /**
+     * Relationship constants
+     */
+    public const DEFINITIONS = 'definitions';
 }
