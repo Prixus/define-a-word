@@ -51,12 +51,27 @@ abstract class DatabaseBaseRepository
     }
 
     /**
+     * Finds a record or create a new one and return it if it does not exists
      * @param array $aInsertedData
      * @return mixed
      */
     public function createOrFindRecord(array $aInsertedData)
     {
         $oRecordModel = $this->oModel->firstOrCreate($aInsertedData);
+
+        # Resets the model to null
+        $this->setModel(null);
+        return $oRecordModel;
+    }
+
+    /**
+     * Creates a record
+     * @param array $aInsertedData
+     * @return mixed
+     */
+    public function createRecord(array $aInsertedData)
+    {
+        $oRecordModel = $this->oModel->create($aInsertedData);
 
         # Resets the model to null
         $this->setModel(null);

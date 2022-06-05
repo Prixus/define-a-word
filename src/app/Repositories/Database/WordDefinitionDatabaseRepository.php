@@ -53,7 +53,7 @@ class WordDefinitionDatabaseRepository extends DatabaseBaseRepository
     public function createNewSearchRecord(array $aInsertData)
     {
         $oInsertedPrevSearch = $this->setModel($this->oPrevSearchesModel)
-            ->createOrFindRecord(Arr::only($aInsertData, WordSearchConstants::SEARCH_WORD));
+            ->createRecord(Arr::only($aInsertData, WordSearchConstants::SEARCH_WORD));
         $aDefinitionIds = [];
         foreach ($aInsertData[DefinitionConstants::DEFINITIONS] as $aDefinition) {
             $aDefinition = [
