@@ -22,6 +22,12 @@ class PrevSearches extends Model
     protected $table = WordSearchConstants::TABLE_NAME;
 
     /**
+     * The attributes that aren't mass assignable.
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
      * Definitions belonging to the current search
      */
     public function definitions()

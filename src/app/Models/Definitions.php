@@ -22,6 +22,12 @@ class Definitions extends Model
     protected $table = DefinitionConstants::TABLE_NAME;
 
     /**
+     * The attributes that aren't mass assignable.
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
      * Previous Searches belonging to the current definition
      */
     public function prevSearches()
