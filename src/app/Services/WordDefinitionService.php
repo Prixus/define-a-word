@@ -3,7 +3,7 @@
 
 namespace App\Services;
 
-use App\Constants\WordDefinitionConstants;
+use App\Constants\DefinitionConstants;
 use App\Exceptions\ApiRequestException;
 use App\Repositories\Api\WordDefinitionRepository;
 
@@ -40,7 +40,7 @@ class WordDefinitionService
     public function fetchWordDefinition(string $sWordDefinition)
     {
         return $this->oWordDefinitionRepository
-            ->setApiEndpoint(WordDefinitionConstants::WORDS_API_DEFINITION_ENDPOINT)
+            ->setApiEndpoint(DefinitionConstants::WORDS_API_DEFINITION_ENDPOINT)
             ->getDataByIdRequest($sWordDefinition);
     }
 }

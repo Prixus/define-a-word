@@ -8,33 +8,23 @@ namespace App\Constants;
  *
  * @package App\Constants
  * @author Simon Peter Calamno
- * @since 2022.06.04
+ * @since 2022.06.05
  */
 class WordDefinitionConstants extends BaseConstants
 {
     /**
-     * Words API URL Constants
+     * Database table name
      */
-    public const WORDS_API_DOMAIN = 'wordsapiv1.p.rapidapi.com';
-    public const WORDS_API_DEFINITION_ENDPOINT = '/words/$id/definitions';
+    public const TABLE_NAME = 'definitions_prev_searches';
 
     /**
-     * Words API Header Keys
+     * Database primary key
      */
-    public const RAPID_API_HOST_HEADER = 'X-RapidAPI-Host';
-    public const RAPID_API_KEY_HEADER = 'X-RapidAPI-Key';
+    public const PRIMARY_KEY = 'definition_prev_search_no';
 
     /**
-     * Words API Headers
+     * Indexes
      */
-    public const RAPID_API_AUTH_HEADERS = [
-        self::RAPID_API_HOST_HEADER => 'wordsapiv1.p.rapidapi.com',
-        self::RAPID_API_KEY_HEADER  => 'e7a07e3487msh45d759ce3583a9dp173a01jsn08993f9fda55'
-    ];
-
-    /**
-     * API Keys
-     */
-    public const WORD = 'word';
-    public const DEFINITIONS = 'definitions';
+    public const INDEX_FK_DEFINITIONS = 'ixnn_definitions__definition_no';
+    public const INDEX_FK_PREV_SEARCHES = 'ixnn_prev_searches__prev_search_no';
 }

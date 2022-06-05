@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\WordSearchConstants;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,8 +20,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prev_searches', function (Blueprint $table) {
-            $table->id();
+        Schema::create(WordSearchConstants::TABLE_NAME, function (Blueprint $table) {
+            $table->bigIncrements(WordSearchConstants::PRIMARY_KEY);
+            $table->string(WordSearchConstants::SEARCH_WORD, 100);
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prev_searches');
+        Schema::dropIfExists(WordSearchConstants::TABLE_NAME);
     }
 };

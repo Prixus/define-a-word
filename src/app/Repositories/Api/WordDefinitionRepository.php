@@ -3,7 +3,7 @@
 
 namespace App\Repositories\Api;
 
-use App\Constants\WordDefinitionConstants;
+use App\Constants\DefinitionConstants;
 use App\Exceptions\ApiRequestException;
 use Illuminate\Support\Arr;
 
@@ -21,9 +21,9 @@ class WordDefinitionRepository extends ApiBaseRepository
      */
     public function __construct()
     {
-        $this->setBaseDomain(WordDefinitionConstants::WORDS_API_DOMAIN)
+        $this->setBaseDomain(DefinitionConstants::WORDS_API_DOMAIN)
             ->setHttpsProtocol(true)
-            ->setRequestHeaders(WordDefinitionConstants::RAPID_API_AUTH_HEADERS);
+            ->setRequestHeaders(DefinitionConstants::RAPID_API_AUTH_HEADERS);
     }
 
     /**
@@ -40,6 +40,6 @@ class WordDefinitionRepository extends ApiBaseRepository
         array $aRequestParameters = []
     ) {
       $aWordsDefinition = parent::getDataByIdRequest($sId, $sIdentifier, $aRequestParameters);
-      return Arr::get($aWordsDefinition, WordDefinitionConstants::DEFINITIONS, []);
+      return Arr::get($aWordsDefinition, DefinitionConstants::DEFINITIONS, []);
     }
 }
