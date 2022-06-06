@@ -52,4 +52,11 @@ abstract class BaseConstants
      * Relationship constants
      */
     public const DEFINITIONS = 'definitions';
+
+    /**
+     * Common Constants
+     */
+    public const MESSAGE = 'message';
+    public const CREATED_AT = 'created_at';
+    public const UPDATED_AT = 'updated_at';
 }
