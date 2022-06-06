@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Constants\WordDefinitionConstants;
+use App\Constants\DefinitionConstants;
 
 /**
  * Class FetchWordDefinitionRequest
@@ -21,7 +21,7 @@ class FetchWordDefinitionRequest extends BaseRequest
     public function all($keys = null)
     {
         $data = parent::all($keys);
-        $data[WordDefinitionConstants::WORD] = $this->route(WordDefinitionConstants::WORD);
+        $data[DefinitionConstants::WORD] = $this->route(DefinitionConstants::WORD);
         return $data;
     }
 
@@ -43,7 +43,7 @@ class FetchWordDefinitionRequest extends BaseRequest
     public function rules()
     {
         return [
-            WordDefinitionConstants::WORD => [
+            DefinitionConstants::WORD => [
                 self::REQUIRED,
                 self::STRING
             ]

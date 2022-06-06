@@ -3,9 +3,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\WordDefinitionConstants;
+use App\Constants\DefinitionConstants;
 use App\Exceptions\ApiRequestException;
 use App\Http\Requests\FetchWordDefinitionRequest;
+use App\Http\Resources\WordResource;
 use App\Services\WordDefinitionService;
 
 /**
@@ -40,6 +41,8 @@ class WordDefinitionController extends Controller
     public function fetchWordDefinition(FetchWordDefinitionRequest $oFetchWordDefinitionRequest)
     {
         $aValidatedData = $oFetchWordDefinitionRequest->validated();
-        return $this->oWordDefinitionService->fetchWordDefinition($aValidatedData[WordDefinitionConstants::WORD]);
+        return new WordResource(
+            $this->oWordDefinitionService->fetchWordDefinition($aValidatedData[DefinitionConstants::WORD])
+        );
     }
 }

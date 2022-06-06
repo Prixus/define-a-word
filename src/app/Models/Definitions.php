@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Constants\DefinitionConstants;
+use App\Constants\WordDefinitionConstants;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,5 +15,34 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Definitions extends Model
 {
+    /**
+     * Syncs the model to a database table
+     * @var string
+     */
+    protected $table = DefinitionConstants::TABLE_NAME;
 
+    /**
+     * Sets the Primary Key
+     * @var string
+     */
+    protected $primaryKey = DefinitionConstants::PRIMARY_KEY;
+
+    /**
+     * The attributes that aren't mass assignable.
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * Previous Searches belonging to the current definition
+     */
+    public function prevSearches()
+    {
+        return $this->belongsToMany(
+            PrevSearches::class,
+            WordDefinitionConstants::TABLE_NAME,
+            WordDefinitionConstants::DEFINITION_NO,
+            WordDefinitionConstants::PREV_SEARCH_NO
+        );
+    }
 }

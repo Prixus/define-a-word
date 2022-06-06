@@ -1,10 +1,7 @@
 version: '3'
 
-networks:
-  define-a-word:
-
 services:
-  define-a-word-web-server:
+  web-server:
     image: nginx:stable-alpine
     container_name: define-a-word-web-server
     ports:
@@ -13,12 +10,10 @@ services:
     - ./src:/var/www/app
     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - define-a-word-app
-      - define-a-word-database
-    networks:
-      - define-a-word
+      - app
+      - database
 
-  define-a-word-database:
+  database:
     image: mysql:5.7.22
     container_name: define-a-word-database
     restart: unless-stopped
@@ -34,10 +29,8 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
-    networks:
-      - define-a-word
 
-  define-a-word-app:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -46,5 +39,3 @@ services:
       - ./src:/var/www/app
     ports:
       - "9000:9000"
-    networks:
-      - define-a-word

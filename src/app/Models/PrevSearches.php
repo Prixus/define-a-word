@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Constants\WordDefinitionConstants;
+use App\Constants\WordSearchConstants;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,5 +15,34 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PrevSearches extends Model
 {
+    /**
+     * Syncs the model to a database table
+     * @var string
+     */
+    protected $table = WordSearchConstants::TABLE_NAME;
 
+    /**
+     * Sets the Primary Key
+     * @var string
+     */
+    protected $primaryKey = WordSearchConstants::PRIMARY_KEY;
+
+    /**
+     * The attributes that aren't mass assignable.
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * Definitions belonging to the current search
+     */
+    public function definitions()
+    {
+        return $this->belongsToMany(
+            Definitions::class,
+            WordDefinitionConstants::TABLE_NAME,
+            WordDefinitionConstants::PREV_SEARCH_NO,
+            WordDefinitionConstants::DEFINITION_NO
+        );
+    }
 }
