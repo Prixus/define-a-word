@@ -39,3 +39,11 @@ services:
       - ./src:/var/www/app
     ports:
       - "9000:9000"
+
+  cron:
+    build:
+      context: .
+      dockerfile: cron.Dockerfile
+    container_name: define-a-word-cron
+    volumes:
+    - ./src:/var/www/app
