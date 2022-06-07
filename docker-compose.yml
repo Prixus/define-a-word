@@ -23,8 +23,8 @@ services:
     volumes:
     - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: homestead
+      MYSQL_DATABASE: words
+      MYSQL_USER: root
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
@@ -39,3 +39,11 @@ services:
       - ./src:/var/www/app
     ports:
       - "9000:9000"
+
+  cron:
+    build:
+      context: .
+      dockerfile: cron.Dockerfile
+    container_name: define-a-word-cron
+    volumes:
+    - ./src:/var/www/app
