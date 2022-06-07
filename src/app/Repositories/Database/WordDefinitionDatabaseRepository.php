@@ -4,10 +4,12 @@
 namespace App\Repositories\Database;
 
 use App\Constants\DefinitionConstants;
+use App\Constants\WordDefinitionConstants;
 use App\Constants\WordSearchConstants;
 use App\Models\Definitions;
 use App\Models\PrevSearches;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\TFirstDefault;
 use Illuminate\Support\TValue;
 use Illuminate\Database\Eloquent\Model;
@@ -99,5 +101,17 @@ class WordDefinitionDatabaseRepository extends DatabaseBaseRepository
                 100,
                 [WordSearchConstants::DEFINITIONS]
             )->first();
+    }
+
+    /**
+     * Truncate all records related to word definition
+     */
+    public function truncateWordDefinitionTables() : void
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        DB::table(WordDefinitionConstants::TABLE_NAME)->truncate();
+        $this->oDefinitionsModel->truncate();
+        $this->oPrevSearchesModel->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
     }
 }
