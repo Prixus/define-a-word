@@ -5,6 +5,13 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
+/**
+ * Class Handler
+ *
+ * @package App\Exceptions
+ * @author Simon Peter Calamno
+ * @since 2022.06.04
+ */
 class Handler extends ExceptionHandler
 {
     /**
@@ -22,7 +29,8 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        //
+        ApiRequestException::class,
+        ValidationException::class
     ];
 
     /**

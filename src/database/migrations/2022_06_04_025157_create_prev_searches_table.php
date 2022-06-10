@@ -1,9 +1,16 @@
 <?php
 
+use App\Constants\WordSearchConstants;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * Previous Searches Table Migration
+ *
+ * @author Simon Peter Calamno
+ * @since 2022.06.04
+ */
 return new class extends Migration
 {
     /**
@@ -13,13 +20,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create(WordSearchConstants::TABLE_NAME, function (Blueprint $table) {
+            $table->bigIncrements(WordSearchConstants::PRIMARY_KEY);
+            $table->string(WordSearchConstants::SEARCH_WORD, 100);
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists(WordSearchConstants::TABLE_NAME);
     }
 };

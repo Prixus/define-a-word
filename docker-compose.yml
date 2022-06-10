@@ -1,26 +1,21 @@
 version: '3'
 
-networks:
-  laravel:
-
 services:
-  nginx:
+  web-server:
     image: nginx:stable-alpine
-    container_name: nginx
+    container_name: define-a-word-web-server
     ports:
     - "8088:80"
     volumes:
-    - ./src:/var/www/html
+    - ./src:/var/www/app
     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - php
-      - mysql
-    networks:
-      - laravel
+      - app
+      - database
 
-  mysql:
+  database:
     image: mysql:5.7.22
-    container_name: mysql
+    container_name: define-a-word-database
     restart: unless-stopped
     tty: true
     ports:
@@ -28,23 +23,27 @@ services:
     volumes:
     - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: homestead
+      MYSQL_DATABASE: words
+      MYSQL_USER: root
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
-    networks:
-      - laravel
 
-  php:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: php
+    container_name: define-a-word-app
     volumes:
-      - ./src:/var/www/html
+      - ./src:/var/www/app
     ports:
       - "9000:9000"
-    networks:
-      - laravel
+
+  cron:
+    build:
+      context: .
+      dockerfile: cron.Dockerfile
+    container_name: define-a-word-cron
+    volumes:
+    - ./src:/var/www/app
