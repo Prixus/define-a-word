@@ -1,1 +1,48 @@
+body {
+    background-color: #EEEBDD!important;
+}
 
+#main {
+    .container {
+        height: 100vh;
+    }
+
+
+    .row {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .form-card {
+        margin-top: 20px;
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group-text {
+            padding: 8px;
+        }
+    }
+
+    .search-card {
+        height : 60vh;
+
+        .center-search-card {
+            position: relative;
+            top: 40%;
+        }
+    }
+}
+
+
+#recent-search {
+    .container {
+        height: 100vh;
+    }
+
+    .recent-searches {
+        margin-top: 30px;
+    }
+
+}
