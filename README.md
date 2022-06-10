@@ -14,14 +14,31 @@ This app uses docker for easier setup of dependencies ([Don't have docker yet? C
 ```
 3. Run this commands for docker setup.
 ```
-λ docker-compose build
-λ docker-compose up -d
+λ docker-compose up -d --build
 ```
 4. After the building the docker images, run this command to update the app dependencies.
 ```
-λ docker-compose exec --user root define-a-word-app composer install
+λ docker-compose exec app composer install
 ```
-5. Setup the app configurations by following this command. This copy the sample ENV file into our current ENV file.
+5. Setup the database by executing the following command. The password is `secret`. This will open the mysql instance in our docker contianer
+```
+λ docker-compose exec database mysql -u root -p
+```
+6. Create the `words` database. Make sure to exit the mysql container instance after creating the database.
+```
+mysql> CREATE DATABASE words;
+```
+7.  Setup the app configurations by following this command. This copy the sample ENV file into our current ENV file.
 ```
 λ cp src/.env.example src/.env
 ```
+8. Run the following commands to create the database tables.
+```
+λ docker-compose exec app php artisan migrate:fresh
+```
+9. Navigate to the src directory and execute install node modules
+```
+λ cd src
+λ npm install
+```
+9. Open http://localhost:8080.
