@@ -10,12 +10,16 @@ const routes = [
     {
         path: '/',
         name: 'main',
-        component: () => import(/* webpackChunkName: "Main" */ '../components/pages/Main.vue')
+        component: () => import(/* webpackChunkName: "Main" */ '../components/pages/MainPage.vue')
     },
     {
         path: '/recent-searches',
         name: 'recent_searches',
-        component: () => import(/* webpackChunkName: "RecentSearches" */ '../components/pages/RecentSearches.vue')
+        component: () => import(/* webpackChunkName: "RecentSearches" */ '../components/pages/RecentSearchesPage.vue')
+    },
+    {
+        path        : '*',
+        beforeEnter : () => window.location.href = '/'
     }
 ];
 

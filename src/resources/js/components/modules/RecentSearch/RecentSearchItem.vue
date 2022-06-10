@@ -1,7 +1,7 @@
 <template>
-    <b-card title="Test">
+    <b-card :title="sSearchWord">
         <b-card-sub-title>
-            Search time : 2022-05-26 00:00:00
+            Search time : {{ sCreatedTime }}
         </b-card-sub-title>
     </b-card>
 
@@ -15,6 +15,16 @@
      * @since 2022.06.10
      */
     export default {
-        name : 'RecentSearchItem'
+        name  : 'RecentSearchItem',
+        props : {
+            sSearchWord : {
+                type    : String,
+                required : true
+            },
+            sCreatedTime : {
+                type     : String,
+                required : true
+            }
+        }
     }
 </script>

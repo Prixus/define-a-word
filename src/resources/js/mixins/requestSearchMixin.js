@@ -9,12 +9,22 @@ import Axios from 'axios';
 export default {
     methods: {
         /**
-         * Sends request for getting the total invoice count
+         * Sends request for getting the definition of a word
          * @return {Promise<AxiosResponse<T>>}
          * @param sSearchWord
          */
-        fetchWordDefinitionRequest(sSearchWord) {
+        fetchWordDefinitionRequest(sSearchWord)
+        {
             return Axios.get('/api/definition/' + sSearchWord);
         },
+
+        /**
+         * Sends a request to fetch previous words that have been searched
+         * @returns {Promise<AxiosResponse<T>>}
+         */
+        fetchPreviousWordSearchRequests()
+        {
+            return Axios.get('/api/previous-searches');
+        }
     }
 };

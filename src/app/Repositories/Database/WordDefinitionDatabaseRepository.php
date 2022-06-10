@@ -9,6 +9,7 @@ use App\Constants\WordSearchConstants;
 use App\Models\Definitions;
 use App\Models\PrevSearches;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\TFirstDefault;
 use Illuminate\Support\TValue;
@@ -96,11 +97,22 @@ class WordDefinitionDatabaseRepository extends DatabaseBaseRepository
     {
         return $this->setModel($this->oPrevSearchesModel)
             ->setPrimaryKey(WordSearchConstants::PRIMARY_KEY)
-            ->fetchRecordByIdentifiers(
+            ->fetchData(
                 [WordSearchConstants::SEARCH_WORD => $sSearchWord],
                 100,
                 [WordSearchConstants::DEFINITIONS]
             )->first();
+    }
+
+    /**
+     * Fetches the word searches stored in the database
+     * @return Builder[]|Collection
+     */
+    public function fetchWordSearches()
+    {
+        return $this->setModel($this->oPrevSearchesModel)
+            ->setPrimaryKey(WordDefinitionConstants::PRIMARY_KEY)
+            ->fetchData();
     }
 
     /**
