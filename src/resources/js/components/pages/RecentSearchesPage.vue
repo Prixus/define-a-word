@@ -15,6 +15,6 @@
      */
     export default {
         name       : 'RecentSearches',
-        components : {RecentSearch}
+        components : {RecentSearch},
     }
 </script>

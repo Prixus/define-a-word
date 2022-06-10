@@ -59,4 +59,5 @@ abstract class BaseConstants
     public const MESSAGE = 'message';
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
+    public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 }

@@ -6,6 +6,8 @@ use App\Constants\WordSearchConstants;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use JsonSerializable;
 
 /**
@@ -35,10 +37,16 @@ class WordResource extends JsonResource
 
         return [
             WordSearchConstants::PREV_SEARCH_NO => $this->{WordSearchConstants::PREV_SEARCH_NO},
-            WordSearchConstants::SEARCH_WORD    => $this->{WordSearchConstants::SEARCH_WORD},
+            WordSearchConstants::SEARCH_WORD    => Str::ucfirst($this->{WordSearchConstants::SEARCH_WORD}),
             WordSearchConstants::DEFINITIONS    => DefinitionResource::collection($this->{WordSearchConstants::DEFINITIONS}),
-            WordSearchConstants::CREATED_AT     => $this->{WordSearchConstants::CREATED_AT},
-            WordSearchConstants::UPDATED_AT     => $this->{WordSearchConstants::UPDATED_AT}
+            WordSearchConstants::CREATED_AT     => Carbon::createFromFormat(
+                WordSearchConstants::DATE_TIME_FORMAT,
+                $this->{WordSearchConstants::CREATED_AT}
+                )->toDateTimeString(),
+            WordSearchConstants::UPDATED_AT     => Carbon::createFromFormat(
+                WordSearchConstants::DATE_TIME_FORMAT,
+                $this->{WordSearchConstants::UPDATED_AT}
+            )->toDateTimeString(),
         ];
     }
 }
