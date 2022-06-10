@@ -6,8 +6,10 @@ namespace App\Http\Controllers;
 use App\Constants\DefinitionConstants;
 use App\Exceptions\ApiRequestException;
 use App\Http\Requests\FetchWordDefinitionRequest;
+use App\Http\Resources\PreviousSearchResource;
 use App\Http\Resources\WordResource;
 use App\Services\WordDefinitionService;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * Class WordDefinitionController
@@ -44,5 +46,14 @@ class WordDefinitionController extends Controller
         return new WordResource(
             $this->oWordDefinitionService->fetchWordDefinition($aValidatedData[DefinitionConstants::WORD])
         );
+    }
+
+    /**
+     * Fetches Previously Searched Words
+     * @return AnonymousResourceCollection
+     */
+    public function fetchRecentSearches()
+    {
+        return PreviousSearchResource::collection($this->oWordDefinitionService->fetchPreviousWordSearches());
     }
 }

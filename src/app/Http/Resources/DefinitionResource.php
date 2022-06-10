@@ -6,6 +6,7 @@ use App\Constants\DefinitionConstants;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 use JsonSerializable;
 
 /**
@@ -29,8 +30,14 @@ class DefinitionResource extends JsonResource
             DefinitionConstants::DEFINITION_NO  => $this->{DefinitionConstants::DEFINITION_NO},
             DefinitionConstants::DEFINITION     => $this->{DefinitionConstants::DEFINITION},
             DefinitionConstants::PART_OF_SPEECH => $this->{DefinitionConstants::PART_OF_SPEECH},
-            DefinitionConstants::CREATED_AT     => $this->{DefinitionConstants::CREATED_AT},
-            DefinitionConstants::UPDATED_AT     => $this->{DefinitionConstants::UPDATED_AT}
+            DefinitionConstants::CREATED_AT     => Carbon::createFromFormat(
+                DefinitionConstants::DATE_TIME_FORMAT,
+                $this->{DefinitionConstants::CREATED_AT}
+            )->toDateTimeString(),
+            DefinitionConstants::UPDATED_AT     => Carbon::createFromFormat(
+                DefinitionConstants::DATE_TIME_FORMAT,
+                $this->{DefinitionConstants::UPDATED_AT}
+            )->toDateTimeString(),
         ];
     }
 }

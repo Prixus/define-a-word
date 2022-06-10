@@ -33,7 +33,7 @@ abstract class DatabaseBaseRepository
      * @param Model|null $oModel
      * @return $this
      */
-    public function setModel(?Model $oModel)
+    protected function setModel(?Model $oModel)
     {
         $this->oModel = $oModel;
         return $this;
@@ -44,7 +44,7 @@ abstract class DatabaseBaseRepository
      * @param string $sPrimaryKey
      * @return $this
      */
-    public function setPrimaryKey(string $sPrimaryKey)
+    protected function setPrimaryKey(string $sPrimaryKey)
     {
         $this->sPrimaryKey = $sPrimaryKey;
         return $this;
@@ -55,7 +55,7 @@ abstract class DatabaseBaseRepository
      * @param array $aInsertedData
      * @return mixed
      */
-    public function createOrFindRecord(array $aInsertedData)
+    protected function createOrFindRecord(array $aInsertedData)
     {
         $oRecordModel = $this->oModel->firstOrCreate($aInsertedData);
 
@@ -69,7 +69,7 @@ abstract class DatabaseBaseRepository
      * @param array $aInsertedData
      * @return mixed
      */
-    public function createRecord(array $aInsertedData)
+    protected function createRecord(array $aInsertedData)
     {
         $oRecordModel = $this->oModel->create($aInsertedData);
 
@@ -85,7 +85,7 @@ abstract class DatabaseBaseRepository
      * @param array $aWith
      * @return Builder|Model|object
      */
-    public function fetchRecordById(int $iId, $iLimit = 100, array $aWith = [])
+    protected function fetchRecordById(int $iId, $iLimit = 100, array $aWith = [])
     {
         $oFetchedModel = $this->oModel->with($aWith)
             ->where([$this->sPrimaryKey => $iId])
@@ -97,13 +97,13 @@ abstract class DatabaseBaseRepository
     }
 
     /**
-     * Fetches a record by the id
+     * Fetches records from the database
      * @param array $aIdentifiers
      * @param int $iLimit
      * @param array $aWith
      * @return Builder[]|Collection
      */
-    public function fetchRecordByIdentifiers(array $aIdentifiers = [], $iLimit = 100, array $aWith = [])
+    protected function fetchData(array $aIdentifiers = [], $iLimit = 100, array $aWith = [])
     {
         $oFetchedModel = $this->oModel->with($aWith)
             ->where($aIdentifiers)

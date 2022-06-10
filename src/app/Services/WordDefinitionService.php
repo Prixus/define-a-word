@@ -8,6 +8,8 @@ use App\Constants\WordSearchConstants;
 use App\Exceptions\ApiRequestException;
 use App\Repositories\Api\WordDefinitionApiRepository;
 use App\Repositories\Database\WordDefinitionDatabaseRepository;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class WordDefinitionService
@@ -65,5 +67,14 @@ class WordDefinitionService
         }
 
         return $this->oWordDefinitionDatabaseRepository->createNewSearchRecord($aWordDefinitions);
+    }
+
+    /**
+     * Fetches all the previous word searches
+     * @return Builder[]|Collection
+     */
+    public function fetchPreviousWordSearches()
+    {
+        return $this->oWordDefinitionDatabaseRepository->fetchWordSearches();
     }
 }

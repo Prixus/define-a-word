@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\WordDefinitionController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/definition/{word}', [WordDefinitionController::class, 'fetchWordDefinition']);
+Route::get('/previous-searches', [WordDefinitionController::class, 'fetchRecentSearches']);
