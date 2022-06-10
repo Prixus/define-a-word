@@ -16,40 +16,14 @@
     </style>
     <link rel="stylesheet" type="text/css" href="https://img.echosting.cafe24.com/calendars/duetds/css/themes/ec-date-picker.css">
     <link rel="stylesheet" type="text/css" href="https://img.echosting.cafe24.com/calendars/duetds/css/default.css">
-    <link href="{{ secure_asset('/sass/app.sass') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script type="text/javascript" src="https://img.echosting.cafe24.com/calendars/duetds/js/3.6.5/duet.js"></script>
     <script type="text/javascript" src="https://img.echosting.cafe24.com/calendars/duetds/js/i18n/ko_KR.js"></script>
     <script type="text/javascript" src="https://img.echosting.cafe24.com/calendars/duetds/js/date-complete.js"></script>
-    <style>
-        body { font-family: 'Nunito', sans-serif; background: #f4f5f8;}
-        .image-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 16vh;
-            background: white
-        }
-        .loader-modal { display:none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 10px; }
-        .loader { z-index:5; position:absolute; top:calc(50% - 41px); left:calc(50% - 41px); display:inline-block; }
-        .scroll ul {
-            margin-left: 16px;
-        }
-        .scroll ul li {
-            list-style: unset;
-        }
-        .scroll ol li {
-            list-style: unset;
-        }
-    </style>
 </head>
 <body>
 <div id="app">
     <app></app>
-</div>
-<div id="loader" class="loader-modal">
-    <div class="loader">
-        <img src="//img.echosting.cafe24.com/suio/ico_loading.gif" alt="loader" />
-    </div>
 </div>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    $END$
+    <router-view></router-view>
 </template>
 
 <script>
@@ -7,7 +7,3 @@
         name: "App.vue"
     }
 </script>
-
-<style scoped>
-
-</style>
